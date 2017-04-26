@@ -1,6 +1,9 @@
-> python3 test.py
+
+    python3 test.py
 
 actual frequency content [120, 1000, 1200, 2200]
+
 freq peaks from czt / zoom FFT [118.11023622047244, 992.12598425196848, 1204.724409448819, 2220.4724409448818]
+
 freq peaks from fft [0.0, 941.17647058823536, 1129.4117647058824, 2070.588235294118]
 
