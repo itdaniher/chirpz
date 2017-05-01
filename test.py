@@ -2,7 +2,7 @@ from chirpz import chirpz
 import numpy as np
 import matplotlib
 
-matplotlib.use('ps')
+matplotlib.use('cairo')
 from matplotlib import pyplot as plt
 
 t = np.linspace(0, 1, 48e3)
