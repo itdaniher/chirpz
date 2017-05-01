@@ -48,15 +48,13 @@ def chirpz(x, A, W, M):
     # Y = fft(Y padded to power of two)
     n = np.arange(N,dtype=float)
     y = np.power(A,-n) * np.power(W,n**2 / 2.) * x
-    Y = np.fft.fft(y,L)
 
     v = np.zeros(L,dtype=np.complex)
     v[:M] = np.power(W,-n[:M]**2/2.)
     v[L-N+1:] = np.power(W,-n[N-1:0:-1]**2/2.)
-    V = np.fft.fft(v)
 
     # fast convolve, undo, select first M samples
-    g = np.fft.ifft(V*Y)[:M]
+    g = np.fft.ifft(np.fft.fft(v) * np.fft.fft(y, L))[:M]
     k = np.arange(M)
     g *= np.power(W,k**2 / 2.)
 
