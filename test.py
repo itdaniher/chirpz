@@ -8,10 +8,9 @@ from matplotlib import pyplot as plt
 t = np.linspace(0, 1, 48e3)
 freqs = [120, 1000, 1200, 2200]
 x = np.random.rand(512) - 0.5
-x *= 5
 for freq in freqs:
     x += np.sin(freq*t[:512]*2*np.pi)
-
+x /= np.max([np.abs(np.min(x)), np.max(x)])
 plt.title('input vector')
 plt.plot(x)
 plt.xlabel('samples')
