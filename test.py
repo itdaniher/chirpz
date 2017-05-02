@@ -2,7 +2,7 @@ from chirpz import chirpz
 import numpy as np
 import matplotlib
 
-matplotlib.use('cairo')
+#1matplotlib.use('cairo')
 from matplotlib import pyplot as plt
 
 t = np.linspace(0, 1, 48e3)
@@ -23,8 +23,7 @@ print('actual frequency content', freqs)
 m = len(x)//2
 
 Fs = 48e3
-
-F1 = 900 
+F1 = 900
 F2 = 3000
 
 # input, start, step, length
@@ -46,17 +45,17 @@ print('freq peaks from czt / zoom FFT', cztPeaks)
 
 plt.vlines(cztPeaks, 0, max(cztAmps), 'r', label='peaks from czt')
 
-plt.loglog(cztFreqs, cztAmps, 'or', label='czt')
+plt.plot(cztFreqs, cztAmps, 'or', label='czt')
 
-fftFreqs = np.linspace(0, Fs/2, len(x)/2)
+fftFreqs = np.linspace(0, Fs/2, len(x)*2)
 
-fftAmps = np.abs(np.fft.rfft(x))[1::]
+fftAmps = np.abs(np.fft.rfft(x, len(x)*4))[1::]
 
 fftPeaks = [fftFreqs[i-1] for i in range(m) if fftAmps[i-2] < fftAmps[i-1] > fftAmps[i] if fftAmps[i-1] > max(fftAmps)*0.5]
 print('freq peaks from fft', fftPeaks)
 plt.vlines(fftPeaks, 0, max(fftAmps), 'k', label='peaks from fft')
 
-plt.loglog(fftFreqs, fftAmps, '.k', label='fft')
+plt.plot(fftFreqs, fftAmps, '.k', label='fft')
 
 plt.xlabel('freq (Hz)')
 plt.ylabel('amplitude')
