@@ -12,8 +12,6 @@ x *= 5
 for freq in freqs:
     x += np.sin(freq*t[:512]*2*np.pi)
 
-x /= np.mean(x)
-
 plt.title('input vector')
 plt.plot(x)
 plt.xlabel('samples')
